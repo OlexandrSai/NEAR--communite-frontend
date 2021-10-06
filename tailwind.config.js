@@ -1,8 +1,18 @@
 module.exports = {
-  purge: [`./index.html`, `./src/**/*.{vue,js,ts,jsx,tsx}`],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    
+    extend: {
+      /*fontFamily: {
+        'JosefinSans': ['JosefinSans', 'sans-serif']
+      },*/
+      colors: {
+        blue: {
+          900: "#212353"
+        }
+      }
+    },
   },
   variants: {
     extend: {},
