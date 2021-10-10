@@ -1,9 +1,9 @@
 import { keyStores, Near, WalletConnection } from "near-api-js";
 //utils
-//import BN from "bn.js";
+import BN from "bn.js";
 
 export const CONTRACT_ID = "dev-1631284937046-18202365708707";
-//const gas = new BN("70000000000000");
+const gas = new BN("70000000000000");
 
 export const near = new Near({
     networkId: "testnet",
@@ -30,16 +30,16 @@ export const getComplaints = () => {
 
 
 
-// //function to sendMessage
-// export const addNewComplaint = ({title, description, category, location}) => {
-//   console.log(title, description, category, location)
-//   return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "addNewComplaint",
-//       gas,
-//       args: {title, description, category, location}
-//   })
-// }
+//function to add new complaint
+export const addNewComplaint = ({title, description, category, location}) => {
+  console.log(title, description, category, location)
+  return wallet.account().functionCall({
+      contractId: CONTRACT_ID,
+      methodName: "addNewComplaint",
+      gas,
+      args: {title, description, category, location}
+  })
+}
 
 // export const voteComplaint = ({id}) => {
 //   console.log(id)

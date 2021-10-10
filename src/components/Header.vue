@@ -33,10 +33,10 @@
                 <img src="@/assets/img/near-logo.png" alt="near-logo">
                 {{accountId}}
             </div>
-            <div v-else class="block px-8 py-1 shadow-md hover:shadow-sm rounded-full flex text-lg font-semibold text-blue-900 ml-auto items-center bg-white">
+            <button @click="signIn" v-else class="block px-8 py-1 shadow-md hover:shadow-sm rounded-full flex text-lg font-semibold text-blue-900 ml-auto items-center bg-white">
                 Login with NEAR
                 <img src="@/assets/img/near-logo.png" alt="near-logo">
-            </div>
+            </button>
         </nav>
         <!-- Naviagtion mobile -->
         <nav class="flex items-center my-6 px-6  lg:hidden" id="openMenu">
@@ -95,12 +95,16 @@
 
 <script>
 import store from '../store/store.js'
+import { wallet, CONTRACT_ID } from "@/services/near"
+
+
 export default {
     setup() {
         const accountId = store.state.accountId
 
         return {
-            accountId
+            accountId,
+            signIn: () => wallet.requestSignIn(CONTRACT_ID)
         }
     }
 }

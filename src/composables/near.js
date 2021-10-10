@@ -1,6 +1,7 @@
 import { ref, onMounted } from "vue";
 import {
-    getComplaints
+    getComplaints,
+    addNewComplaint
 } from "../services/near";
 
 export const useComplaints = () => {
@@ -15,9 +16,9 @@ export const useComplaints = () => {
       }
     });
   
-    // const handleAddMeme = async ({ meme, title, data, category }) => {
-    //   addMeme({ meme, title, data, category });
-    // };
+    const handleAddNewComplaint = async ({ title, description, category, location}) => {
+      addNewComplaint({ title, description, category, location });
+    };
   
     // const handleAddComment = async ({ memeId, text }) => {
     //   await addComment({ memeId, text });
@@ -32,6 +33,7 @@ export const useComplaints = () => {
     // };
   
     return {
-        complaints
+        complaints,
+        addNewComplaint:handleAddNewComplaint
     };
   };

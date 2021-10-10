@@ -38,4 +38,10 @@ router.beforeEach((to,from) => {
   }
 })
 
+router.afterEach((to,from)  => {
+  if ( (from.path==="/create"||from.path==="/dashboard") && to.path==="/") {
+    window.location.reload()
+  }
+})
+
 export default router 
