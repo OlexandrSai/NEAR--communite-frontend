@@ -13,17 +13,17 @@
             <ul class="flex items-center ml-4 lg:ml-32 font-semibold text-gray-500">
                 <!-- Active element-->
                 <li class="ml-12">
-                    <a href="#" class="text-blue-900 hover:text-gray-900">
+                    <a href="#about" class="text-blue-900 hover:text-gray-900">
                         About
                     </a>
                 </li>
                 <li class="ml-12">
-                    <a href="#" class="hover:text-blue-900">
+                    <a href="#help" class="hover:text-blue-900">
                         Help
                     </a>
                 </li>
                 <li class="ml-12">
-                    <a href="#" class="hover:text-blue-900">
+                    <a href="#features" class="hover:text-blue-900">
                         Features
                     </a>
                 </li>

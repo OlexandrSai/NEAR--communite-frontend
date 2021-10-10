@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '../store/store.js'
 import Home from '../views/Home.vue'
+
 
 const routes = [
   {
@@ -30,4 +32,13 @@ const router = createRouter({
   routes
 })
 
-export default router
+router.beforeEach((to,from) => {
+  if (store.state.accountId&&(to.path==="/"&&from.path==="/")) {
+    alert(to.path)
+    alert(from.path)
+    alert('inside')
+    router.push('/dashboard')
+  }
+})
+
+export default router 
