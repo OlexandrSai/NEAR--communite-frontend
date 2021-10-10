@@ -34,9 +34,6 @@ const router = createRouter({
 
 router.beforeEach((to,from) => {
   if (store.state.accountId&&(to.path==="/"&&from.path==="/")) {
-    alert(to.path)
-    alert(from.path)
-    alert('inside')
     router.push('/dashboard')
   }
 })

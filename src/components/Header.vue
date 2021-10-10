@@ -29,10 +29,14 @@
                 </li>
             </ul>
             <!-- Login button -->
-            <a href="#" class="block px-8 py-1 shadow-md hover:shadow-sm rounded-full flex text-lg font-semibold text-blue-900 ml-auto items-center bg-white">
+            <div v-if="accountId" class="block px-8 py-1 shadow-md hover:shadow-sm rounded-full flex text-lg font-semibold text-blue-900 ml-auto items-center bg-white">
+                <img src="@/assets/img/near-logo.png" alt="near-logo">
+                {{accountId}}
+            </div>
+            <div v-else class="block px-8 py-1 shadow-md hover:shadow-sm rounded-full flex text-lg font-semibold text-blue-900 ml-auto items-center bg-white">
                 Login with NEAR
                 <img src="@/assets/img/near-logo.png" alt="near-logo">
-            </a>
+            </div>
         </nav>
         <!-- Naviagtion mobile -->
         <nav class="flex items-center my-6 px-6  lg:hidden" id="openMenu">
@@ -90,7 +94,14 @@
 </template>
 
 <script>
+import store from '../store/store.js'
 export default {
+    setup() {
+        const accountId = store.state.accountId
 
+        return {
+            accountId
+        }
+    }
 }
 </script>

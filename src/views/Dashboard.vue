@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-center" style="background: url(@\assets\img\dashboard-bg-gradient.png) no-repeat center; background-size: cover;">
+  <div  class="page-bg">
     <header class="flex">
         <nav class="border-r-4 border-blue-100" style="min-width: 125px; min-height: 100vh;">
-            <div class="w-full py-10">
+            <!-- <div class="w-full py-10">
                 <a href="#" class="ml-auto block text-center">
                     <img src="@/assets/img/communite-logo.png" alt="" class="mx-auto">
                 </a>
-            </div>
+            </div> -->
             <ul class="mt-48">
                 <li class="mt-8 border-r-8 border-purple-500">
                     <router-link to="/dashboard" class="block py-2 hover:bg-gray-200">
@@ -35,28 +35,28 @@
                 </form>
             </nav>
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-10 mx-10">
-                <div class="rounded-3xl shadow-2xl mt-8 px-6 pt-10 pb-4" style=" background: url(./img/card.png) center no-repeat; background-size: cover;">
+                <div v-for="complaint in  complaints" :key="complaint" class="rounded-3xl shadow-2xl mt-8 px-6 pt-10 pb-4" style=" background: url(./img/card.png) center no-repeat; background-size: cover;">
                     <h3 class="text-xl text-gray-900 font-medium ">
-                        Water problem 
+                        {{complaint.title}} 
                     </h3>
                     <h3 class="text-xl text-gray-600 font-medium mt-2">
                         Description: 
                     </h3>
                     <p class="text-lg text-gray-900 font-semibold">
-                        There is a water leak on my street
+                        {{complaint.description}}
                     </p>
                     <h3 class="text-xl text-gray-600 font-medium mt-2">
                         Location: 
                     </h3>
                     <p class="text-lg text-gray-900 font-semibold">
-                        Coyoacan street zip code 63040 
+                        {{complaint.location}} 
                     </p>
                     <div class="flex mt-2">
                         <h3 class="text-xl text-gray-600 font-medium">
                             Votes: 
                         </h3>
                         <p class="text-xl text-gray-900 font-semibold ml-4">
-                            5
+                            {{complaint.voteCount}}
                         </p>
                     </div>
                     <div class="flex mt-2">
@@ -64,51 +64,12 @@
                             Status: 
                         </h3>
                         <p class="text-xl text-gray-900 font-semibold ml-4">
-                            In progress
+                            {{complaint.status}}
                         </p>
                     </div>
                     <div class="flex justify-center">
                         <a href="#" class="inline-block bg-purple-900 hover:bg-purple-800 text-lg text-white text-center font-bold rounded-full px-4 py-2 mt-6">
                             You already voted
-                        </a>
-                    </div>
-                </div>
-                <div class="rounded-3xl shadow-2xl mt-8 px-6 pt-10 pb-4" style=" background: url(./img/card.png) center no-repeat; background-size: cover;">
-                    <h3 class="text-xl text-gray-900 font-medium ">
-                        Water problem 
-                    </h3>
-                    <h3 class="text-xl text-gray-600 font-medium mt-2">
-                        Description: 
-                    </h3>
-                    <p class="text-lg text-gray-900 font-semibold">
-                        There is a water leak on my street
-                    </p>
-                    <h3 class="text-xl text-gray-600 font-medium mt-2">
-                        Location: 
-                    </h3>
-                    <p class="text-lg text-gray-900 font-semibold">
-                        Coyoacan street zip code 63040 
-                    </p>
-    
-                    <div class="flex mt-2">
-                        <h3 class="text-xl text-gray-600 font-medium">
-                            Votes: 
-                        </h3>
-                        <p class="text-xl text-gray-900 font-semibold ml-4">
-                            5
-                        </p>
-                    </div>
-                    <div class="flex mt-2">
-                        <h3 class="text-xl text-gray-600 font-medium">
-                            Status: 
-                        </h3>
-                        <p class="text-xl text-gray-900 font-semibold ml-4">
-                            In progress
-                        </p>
-                    </div>
-                    <div class="flex justify-center">
-                        <a href="#" class="inline-block bg-purple-500 hover:bg-purple-400 text-lg text-white text-center font-bold rounded-full px-8 py-2 mt-6">
-                            Vote
                         </a>
                     </div>
                 </div>
@@ -119,7 +80,7 @@
                 <a href="#" class="inline-block text-gray-900 bg-white hover:bg-gray-50 active:shadow-none py-2 rounded-2xl shadow-2xl text-xl text-center font-semibold flex item-center justify-center">
                     <img src="@/assets/img/near-logo.png" alt="near-logo">
                     <span class="flex content-center mt-3">
-                        nazarnyzhnyk.near
+                        {{accountId}}
                     </span> 
                 </a>
             </div>
@@ -161,7 +122,7 @@
                 </div>
             </div>
             <div class="w-full mt-24 flex justify-center">
-                <a href="" class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">New compliant</a>
+                <router-link  to="/create" class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">New compliant</router-link>
             </div>
         </section>
     </header>
@@ -169,11 +130,16 @@
 </template>
 
 <script>
+import store from '../store/store.js'
+import { useComplaints } from "@/composables/near"
 export default {
-
+    setup() {
+        const accountId = store.state.accountId
+        const {  complaints } = useComplaints();
+        return {
+            accountId,
+            complaints
+        }
+    }
 }
 </script>
-
-<style>
-
-</style>

@@ -1,12 +1,12 @@
 <template>
-    <div style="background: url(./img/dashboard-bg-gradient.png) no-repeat center; background-size: cover;">
+    <div class="page-bg">
     <header class="flex">
         <nav class="border-r-4 border-blue-100" style="min-width: 125px; min-height: 100vh;">
-            <div class="w-full py-10">
+            <!-- <div class="w-full py-10">
                 <a href="#" class="ml-auto block text-center">
                     <img src="@/assets/img/communite-logo.png" alt="" class="mx-auto">
                 </a>
-            </div>
+            </div> -->
             <ul class="mt-48">
                 <li class="mt-8">
                     <router-link to="/dashboard" class="block py-2 hover:bg-gray-200">
@@ -71,7 +71,7 @@
                 <a href="#" class="inline-block text-gray-900 bg-white hover:bg-gray-50 active:shadow-none py-2 rounded-2xl shadow-2xl text-xl text-center font-semibold flex item-center justify-center">
                     <img src="@/assets/img/near-logo.png" alt="near-logo">
                     <span class="flex content-center mt-3">
-                        nazarnyzhnyk.near
+                        {{accountId}}
                     </span> 
                 </a>
             </div>
@@ -112,20 +112,22 @@
                     </p>
                 </div>
             </div>
-            <div class="w-full mt-24 flex justify-center">
+            <!-- <div class="w-full mt-24 flex justify-center">
                 <a href="" class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">New compliant</a>
-            </div>
+            </div> -->
         </section>
     </header>
     </div>
 </template>
 
 <script>
+import store from '../store/store.js'
 export default {
-
+    setup() {
+        const accountId = store.state.accountId
+        return {
+            accountId
+        }
+    }
 }
 </script>
-
-<style>
-
-</style>
