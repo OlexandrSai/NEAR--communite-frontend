@@ -32,6 +32,24 @@ export const addNewComplaint = ({title, description, category, location}) => {
 });
 }
 
+//function to vote
+export const voteComplaint = (id) => {
+  return wallet.account().functionCall({
+    contractId: CONTRACT_ID,
+    methodName: "voteComplaint",
+    args: {id:id}
+});
+}
+
+//function to remove vote
+export const removeVote = (id) => {
+  return wallet.account().functionCall({
+    contractId: CONTRACT_ID,
+    methodName: "removeVote",
+    args: {id:id}
+});
+}
+
 // export const voteComplaint = ({id}) => {
 //   console.log(id)
 //   return wallet.account().functionCall({

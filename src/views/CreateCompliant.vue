@@ -51,43 +51,6 @@
                         </div>
                 </a>
             </div>
-            <h2 class="mt-16 text-2xl text-gray-900 font-semibold">
-                Your recent compliants
-            </h2>
-            <div class="rounded-3xl shadow-2xl mt-8 px-6 py-10" style=" background: url(./img/card.png) center no-repeat; background-size: cover;">
-                <h3 class="text-xl text-gray-900 font-medium ">
-                    Water problem 
-                </h3>
-                <h3 class="text-xl text-gray-600 font-medium mt-2">
-                    Description: 
-                </h3>
-                <p class="text-lg text-gray-900 font-semibold">
-                    There is a water leak on my street
-                </p>
-                <h3 class="text-xl text-gray-600 font-medium mt-2">
-                    Location: 
-                </h3>
-                <p class="text-lg text-gray-900 font-semibold">
-                    Coyoacan street zip code 63040 
-                </p>
-
-                <div class="flex mt-2">
-                    <h3 class="text-xl text-gray-600 font-medium">
-                        Votes: 
-                    </h3>
-                    <p class="text-xl text-gray-900 font-semibold ml-4">
-                        5
-                    </p>
-                </div>
-                <div class="flex mt-2">
-                    <h3 class="text-xl text-gray-600 font-medium">
-                        Status: 
-                    </h3>
-                    <p class="text-xl text-gray-900 font-semibold ml-4">
-                        In progress
-                    </p>
-                </div>
-            </div>
             <!-- <div class="w-full mt-24 flex justify-center">
                 <a href="" class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">New compliant</a>
             </div> -->
