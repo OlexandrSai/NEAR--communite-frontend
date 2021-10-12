@@ -34,37 +34,7 @@
                     </div>
                 </form>
             </nav>
-            <div class="shadow-2xl rounded-3xl mt-10 ml-10 px-12 py-4" style="width: 600px; background: rgba(255, 255, 255, 0.5);"> 
-                <form action="" class="mt-10 w-full">
-                    <div class="mt-8">
-                        <h3 class="text-lg font-semibold">
-                            Compliant title
-                        </h3>
-                        <input type="text" placeholder="Write here" class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4">
-                    </div>
-                    <div class="mt-8">
-                        <h3 class="text-lg font-semibold">
-                            Description
-                        </h3>
-                        <input type="textarea" placeholder="Write here" class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4">
-                    </div>
-                    <div class="mt-8">
-                        <h3 class="text-lg font-semibold">
-                            Category
-                        </h3>
-                        <input type="text" placeholder="Write here" class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4">
-                    </div>
-                    <div class="mt-8">
-                        <h3 class="text-lg font-semibold">
-                            Location
-                        </h3>
-                        <input type="text" placeholder="Write here" class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4">
-                    </div>
-                    <div class="w-full mt-10 flex justify-center">
-                        <a href="" class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">Create</a>
-                    </div>
-                </form>
-            </div>
+            <AddComplaintForm :addNewComplaint="addNewComplaint"/>
         </main>
         <section class="px-10 border-l-4 border-blue-100 px-12">
             <div class="w-96 mt-12">
@@ -128,15 +98,21 @@
 
 <script>
 import store from '../store/store.js'
+import AddComplaintForm from  '@/components/AddComplaintForm.vue'
 import { wallet} from "@/services/near";
+import { useComplaints} from "@/composables/near"
 import router from '@/router/index.js'
 
 export default {
+    components:  {
+      AddComplaintForm
+    },
     setup() {
         const accountId = store.state.accountId
-
+        const  { addNewComplaint } = useComplaints();
         return {
             accountId,
+            addNewComplaint,
             signOut: () => {
                 wallet.signOut();
                 router.push('/')

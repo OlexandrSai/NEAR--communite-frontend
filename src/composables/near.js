@@ -1,15 +1,20 @@
 import { ref, onMounted } from "vue";
 import {
     getComplaints,
-    addNewComplaint
+    addNewComplaint,
+    alreadyVoted
 } from "../services/near";
+import store from '../store/store.js'
 
 export const useComplaints = () => {
     const complaints = ref([]);
+    const votes = ref([])
     const  err = ref(null)
     onMounted(async () => {
       try {
         complaints.value  = await getComplaints()
+        votes.value = await alreadyVoted(store.state.accountId)
+        console.log()
       } catch (e) {
         err.value = e;
         console.log(err.value);
@@ -17,7 +22,7 @@ export const useComplaints = () => {
     });
   
     const handleAddNewComplaint = async ({ title, description, category, location}) => {
-      addNewComplaint({ title, description, category, location });
+      return await addNewComplaint({ title, description, category, location });
     };
   
     // const handleAddComment = async ({ memeId, text }) => {
@@ -34,6 +39,7 @@ export const useComplaints = () => {
   
     return {
         complaints,
+        votes,
         addNewComplaint:handleAddNewComplaint
     };
   };

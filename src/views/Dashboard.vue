@@ -34,7 +34,7 @@
                     </div>
                 </form>
             </nav>
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-10 mx-10">
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-x-10 mx-10">
                 <div v-for="complaint in  complaints" :key="complaint" class="rounded-3xl shadow-2xl mt-8 px-6 pt-10 pb-4" style=" background: url(./img/card.png) center no-repeat; background-size: cover;">
                     <h3 class="text-xl text-gray-900 font-medium ">
                         {{complaint.title}} 
@@ -67,10 +67,15 @@
                             {{complaint.status}}
                         </p>
                     </div>
-                    <div class="flex justify-center">
-                        <a href="#" class="inline-block bg-purple-900 hover:bg-purple-800 text-lg text-white text-center font-bold rounded-full px-4 py-2 mt-6">
+                    <div v-if="votes[complaint.id]" class="flex justify-center">
+                        <button class="inline-block bg-purple-900 hover:bg-purple-800 text-lg text-white text-center font-bold rounded-full px-4 py-2 mt-6">
                             You already voted
-                        </a>
+                        </button>
+                    </div>
+                    <div v-else>
+                         <button class="inline-block bg-purple-500 hover:bg-purple-400 text-lg text-white text-center font-bold rounded-full px-4 py-2 mt-6">
+                            Vote
+                        </button>
                     </div>
                 </div>
             </div>
@@ -144,10 +149,11 @@ import router from '@/router/index.js'
 export default {
     setup() {
         const accountId = store.state.accountId
-        const {  complaints } = useComplaints();
+        const {  complaints, votes } = useComplaints();
         return {
             accountId,
             complaints,
+            votes,
             signOut: () => {
                 wallet.signOut();
                 router.push('/')

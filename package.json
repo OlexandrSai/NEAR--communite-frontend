@@ -10,6 +10,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "near-api-js": "^0.43.1",
+    "vee-validate": "^4.5.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.2"
