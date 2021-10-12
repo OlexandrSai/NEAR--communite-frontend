@@ -16,7 +16,6 @@ export const useComplaints = () => {
       try {
         complaints.value  = await getComplaints()
         votes.value = await alreadyVoted(store.state.accountId)
-        console.log()
       } catch (e) {
         err.value = e;
         console.log(err.value);
