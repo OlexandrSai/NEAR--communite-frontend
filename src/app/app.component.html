@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<ng-container [ngSwitch]="layout">
+  <router-outlet *ngSwitchCase="Layouts.Default"></router-outlet>
+  <app-main-layout *ngSwitchCase="Layouts.Main" [isCreate]="isCreate"></app-main-layout>
+</ng-container>

@@ -1,0 +1,46 @@
+<div  class="page-bg" :key="0">
+  <header class="flex">
+    <nav class="border-r-4 border-blue-100" style="min-width: 125px; min-height: 100vh;">
+      <!-- <div class="w-full py-10">
+          <a href="#" class="ml-auto block text-center">
+              <img src="assets/img/communite-logo.png" alt="" class="mx-auto">
+          </a>
+      </div> -->
+      <ul class="mt-48">
+        <li class="mt-8 border-r-8 border-purple-500">
+          <a routerLink="/dashboard" class="block py-2 hover:bg-gray-200">
+            <img src="assets/img/dashboard.png" alt="" class="mx-auto">
+          </a>
+        </li>
+        <li class="mt-8">
+          <a routerLink="/create" class="block py-2 hover:bg-gray-200">
+            <img src="assets/img/form.png" alt="" class="mx-auto">
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <main class="block mr-auto" style="height: 100vh;">
+      <router-outlet></router-outlet>
+    </main>
+    <section class="px-10 border-l-4 border-blue-100">
+      <div class="w-96 mt-12">
+        <a type="button" (click)="complaintService.nearService.handleSignOut()" class="flex  items-center text-gray-900 bg-white hover:bg-gray-50 active:shadow-none py-2 rounded-2xl shadow-2xl text-xl text-center font-semibold flex item-center justify-center">
+          <img src="assets/img/near-logo.png" alt="near-logo">
+          <span >
+                        {{complaintService.nearService.accountId}}
+                    </span>
+          <div class="flex flex-col mx-3 items-center mt-1 ml-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <!-- <p class="text-sm">logout</p> -->
+          </div>
+        </a>
+      </div>
+      <div class="w-full mt-24 flex justify-center" *ngIf="!isCreate">
+        <a  routerLink="/create" class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">New compliant</a>
+      </div>
+    </section>
+  </header>
+</div>
+

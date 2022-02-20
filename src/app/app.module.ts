@@ -11,6 +11,7 @@ import { FeaturesComponent } from './components/home/features/features.component
 import { FooterComponent } from './components/home/footer/footer.component';
 import { AddComplaintFormComponent } from './components/add-complaint-form/add-complaint-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     HeaderComponent,
     FeaturesComponent,
     FooterComponent,
-    AddComplaintFormComponent
+    AddComplaintFormComponent,
+    MainLayoutComponent
   ],
   imports: [
     BrowserModule,
