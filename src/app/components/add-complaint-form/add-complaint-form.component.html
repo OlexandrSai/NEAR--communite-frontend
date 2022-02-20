@@ -1,0 +1,47 @@
+<div class="shadow-2xl rounded-3xl mt-10 ml-10 px-12 py-4" style="width: 600px; background: rgba(255, 255, 255, 0.5);">
+<!--  <Form  class="mt-10 w-full"-->
+<!--         @submit="handleSubmit"-->
+<!--         :validation-schema="schema">-->
+  <Form  class="mt-10 w-full"
+
+         :validation-schema="schema">
+    <div
+      v-for="field in  formFields"
+      :key="field.id">
+      <div class="mt-8">
+<!--        <h3  class="text-lg font-semibold" :for="field.id">{{field.label}}</h3>-->
+        <h3  class="text-lg font-semibold" :for="field.id"></h3>
+<!--        <Field class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4"-->
+<!--               :v-model="field.id"-->
+<!--               type="text"-->
+<!--               :name="field.id"-->
+<!--               :id="field.id"-->
+<!--               placeholder="Write here"/>-->
+<!--        <ErrorMessage :name="field.id" class="w-64 text-red-500" />-->
+      </div>
+
+    </div>
+
+    <div class="mt-8">
+      <h3 class="text-lg font-semibold">
+        Category
+      </h3>
+<!--      <Field-->
+<!--        as="select"-->
+<!--        v-model="category"-->
+<!--        name="category"-->
+<!--        id="category"-->
+<!--        class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4"-->
+<!--      >-->
+<!--        <option>0</option>-->
+<!--        <option>1</option>-->
+<!--        <option>2</option>-->
+<!--        <option>3</option>-->
+<!--      </Field>-->
+    </div>
+
+    <div class="w-full mt-10 flex justify-center">
+      <button  class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">Create</button>
+    </div>
+  </Form>
+</div>

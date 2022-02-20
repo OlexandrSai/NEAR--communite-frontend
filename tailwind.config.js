@@ -1,20 +1,6 @@
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{html,ts}'],
   theme: {
-    
-    extend: {
-      /*fontFamily: {
-        'JosefinSans': ['JosefinSans', 'sans-serif']
-      },*/
-      colors: {
-        blue: {
-          900: "#212353"
-        }
-      }
-    },
-  },
-  variants: {
     extend: {},
   },
   plugins: [],
