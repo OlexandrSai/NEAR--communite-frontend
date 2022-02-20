@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/home/header/header.component';
 import { FeaturesComponent } from './components/home/features/features.component';
 import { FooterComponent } from './components/home/footer/footer.component';
 import { AddComplaintFormComponent } from './components/add-complaint-form/add-complaint-form.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddComplaintFormComponent } from './components/add-complaint-form/add-c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

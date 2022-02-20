@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ComplaintService} from "../../services/complaint.service";
 
 @Component({
@@ -8,19 +8,19 @@ import {ComplaintService} from "../../services/complaint.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public complaintService: ComplaintService) { }
+  constructor(public complaintService: ComplaintService) {
+  }
 
   ngOnInit(): void {
-
+    this.loadData();
   }
 
   async loadData() {
-      try {
-  this.complaintService.complaints  = await this.complaintService.nearService.getComplaints()
-  this.complaintService.votes = await this.complaintService.nearService.alreadyVoted(this.complaintService.nearService.accountId);
-} catch (e) {
-  this.complaintService.err = e;
-}
-
+    try {
+      this.complaintService.complaints = await this.complaintService.nearService.getComplaints()
+      this.complaintService.votes = await this.complaintService.nearService.alreadyVoted(this.complaintService.nearService.accountId);
+    } catch (e) {
+      this.complaintService.err = e;
+    }
   }
 }

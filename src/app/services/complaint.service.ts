@@ -5,8 +5,8 @@ import {NearService} from "./near.service";
   providedIn: 'root'
 })
 export class ComplaintService {
-  public complaints = [];
-  public votes = [];
+  public complaints: any[] = [];
+  public votes: any[] = [];
   public err: any = null;
 
   constructor(public nearService: NearService) {
