@@ -1,16 +1,12 @@
 <div class="shadow-2xl rounded-3xl mt-10 ml-10 px-12 py-4" style="width: 600px; background: rgba(255, 255, 255, 0.5);">
-<!--  <Form  class="mt-10 w-full"-->
-<!--         @submit="handleSubmit"-->
-<!--         :validation-schema="schema">-->
   <form  class="mt-10 w-full" [formGroup]="complaintForm" (ngSubmit)="create()">
     <div *ngFor="let field of formFields">
       <div class="mt-8">
         <label  class="text-lg font-semibold" [for]="field.id">{{field.label}}</label>
         <input [formControlName]="field.id" placeholder="Write here" [name]="field.id" class="outline-none shadow-xl w-full rounded-3xl py-4 px-6 mt-4">
 
-<!--        <ErrorMessage :name="field.id" class="w-64 text-red-500" />-->
+        <p *ngIf="complaintForm.controls[field.id].errors && complaintForm.controls[field.id].touched" class="w-64 text-red-500">{{getError(complaintForm.controls[field.id].errors)}}</p>
       </div>
-
     </div>
 
     <div class="mt-8">
@@ -25,9 +21,8 @@
         <option value="4">4</option>
       </select>
     </div>
-
     <div class="w-full mt-10 flex justify-center">
-      <button (click)="create()"  class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">Create</button>
+      <button class="bg-purple-500 hover:bg-purple-400 text-white text-lg font-semibold py-4 px-8 rounded-full">Create</button>
     </div>
   </form>
 </div>

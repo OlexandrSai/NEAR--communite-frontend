@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RoutesRecognized} from "@angular/router";
 
 export enum Layouts {
@@ -11,7 +11,7 @@ export enum Layouts {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'NEAR--communite-frontend';
   Layouts = Layouts;
   layout: Layouts = Layouts.Default;
@@ -25,7 +25,6 @@ export class AppComponent {
       if (data instanceof RoutesRecognized) {
         this.layout = data.state?.root?.firstChild?.data['layout'];
         this.isCreate = data.state?.root?.firstChild?.data['isCreate'];
-        console.log(this.layout);
       }
     });
   }

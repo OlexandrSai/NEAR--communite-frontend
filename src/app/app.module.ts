@@ -12,6 +12,7 @@ import { FooterComponent } from './components/home/footer/footer.component';
 import { AddComplaintFormComponent } from './components/add-complaint-form/add-complaint-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
     FeaturesComponent,
     FooterComponent,
     AddComplaintFormComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

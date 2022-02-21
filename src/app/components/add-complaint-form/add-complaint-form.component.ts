@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {ComplaintService} from "../../services/complaint.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-complaint-form',
   templateUrl: './add-complaint-form.component.html',
   styleUrls: ['./add-complaint-form.component.css']
 })
-export class AddComplaintFormComponent implements OnInit {
+export class AddComplaintFormComponent {
   public complaintForm = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl(''),
-    location: new FormControl(''),
-    category: new FormControl(0)
+    title: new FormControl('', [Validators.required, Validators.minLength(2)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    location: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    category: new FormControl(0, Validators.required)
   });
   public category: any = 0;
   public formFields: any = [
@@ -30,18 +31,22 @@ export class AddComplaintFormComponent implements OnInit {
     },
   ];
 
-  constructor(public complaintService: ComplaintService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(public complaintService: ComplaintService, private router: Router) { }
 
   async create() {
-    await this.complaintService.handleAddNewComplaint(this.complaintForm.value);
+    if(this.complaintForm.valid) {
+      await this.complaintService.handleAddNewComplaint(this.complaintForm.value);
+      await this.router.navigate(['dashboard']);
+    }
   }
 
   changeCategory() {
     this.complaintForm.patchValue({
       category: parseInt(this.category)
     })
+  }
+
+  getError(data: any) {
+    return data.required ? "This field required" : `Minimum length is ${data.minlength.requiredLength}`
   }
 }

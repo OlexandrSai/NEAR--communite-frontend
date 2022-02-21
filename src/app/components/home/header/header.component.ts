@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {ComplaintService} from "../../../services/complaint.service";
 
 @Component({
@@ -6,11 +6,7 @@ import {ComplaintService} from "../../../services/complaint.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent{
 
   constructor(public complaintService: ComplaintService) { }
-
-  ngOnInit(): void {
-  }
-
 }
