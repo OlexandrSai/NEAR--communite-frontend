@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NearService} from "./near.service";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ComplaintService {
   public err: any = null;
   public isLoading: boolean = false;
 
-  constructor(public nearService: NearService) {
+  constructor(public nearService: NearService, private toastr: ToastrService) {
   }
 
   async handleAddNewComplaint({
@@ -35,6 +36,13 @@ export class ComplaintService {
 
   async handleRemoveVoteForComplaint(id: any) {
     this.isLoading = true;
+
+    if(this.complaints[id].ticketOwner === this.nearService.accountId+id) {
+      this.toastr.error('Sorry, the ticker owner cant unvote');
+      this.isLoading = false;
+      return;
+    }
+
     const idToInt = parseInt(id)
     await this.nearService.removeVote(idToInt);
     this.complaints = await this.nearService.getComplaints();
