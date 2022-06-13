@@ -27,6 +27,7 @@ export class ComplaintService {
     await this.nearService.voteComplaint(idToInt);
     this.complaints = await this.nearService.getComplaints()
     this.votes = await this.nearService.alreadyVoted(this.nearService.accountId);
+    this.toastr.success('You voted');
     this.isLoading = false;
   };
 
@@ -43,6 +44,7 @@ export class ComplaintService {
     await this.nearService.removeVote(idToInt);
     this.complaints = await this.nearService.getComplaints();
     this.votes = await this.nearService.alreadyVoted(this.nearService.accountId);
+    this.toastr.success('Your vote removed');
     this.isLoading = false;
   };
 }
