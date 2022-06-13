@@ -1,10 +1,7 @@
-import {Injectable} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {keyStores, Near, utils, WalletConnection} from "near-api-js";
-import {Router} from "@angular/router";
-
-// @ts-ignore
-import BN from "bn.js";
+import { Injectable } from '@angular/core';
+import { environment } from "../../environments/environment";
+import { Contract, keyStores, Near, WalletConnection } from "near-api-js";
+import { Router } from "@angular/router";
 
 
 @Injectable({
@@ -12,25 +9,77 @@ import BN from "bn.js";
 })
 export class NearService {
   public accountId = '';
-  public CONTRACT_ID = environment.NG_APP_CONTRACT_ID;
-  public gas = new BN(environment.NG_APP_gas);
-  public near = new Near({
-    networkId: environment.NG_APP_networkId,
-    keyStore: new keyStores.BrowserLocalStorageKeyStore(),
-    nodeUrl: environment.NG_APP_nodeUrl,
-    walletUrl: environment.NG_APP_walletUrl,
-    headers: {}
-  });
-  public wallet = new WalletConnection(this.near, "communite");
+  public CONTRACT_ID = environment.CONTRACT_ID;
+  public near: Near;
+  public wallet: WalletConnection;
+  public commContract: any;
 
   constructor(private router: Router) {
+    // connecting to NEAR
+    this.near = new Near({
+      networkId: environment.NETWORK_ID,
+      keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+      nodeUrl: environment.NODE_URL,
+      walletUrl: environment.WALLET_URL,
+      headers: {}
+    });
+
+    // create wallet connection
+    this.wallet = new WalletConnection(this.near, "communite");
     this.accountId = this.wallet.getAccountId();
+    // get contracts
+    this.commContract = this.getCommContract()
+  }
+
+  private getCommContract() {
+    return new Contract(
+      this.wallet.account(),
+      environment.CONTRACT_ID,
+      {
+        viewMethods: ['getComplaints', 'hasAlreadyVoted'],
+        changeMethods: ['addNewComplaint', 'voteComplaint', 'removeVote']
+      }
+    )
+  }
+
+  // get all
+  async getComplaints() {
+    return await this.commContract.getComplaints();
+  }
+
+  async alreadyVoted(userId: any) {
+    return await this.commContract.hasAlreadyVoted({ accountId: userId })
+
+  }
+
+  // add new complaint
+  async addNewComplaint({ title, description, category, location }:
+                          { title: any, description: any, category: any, location: any }) {
+    return await this.commContract.addNewComplaint({ title, description, category, location });
+  }
+
+  // vote
+  async voteComplaint(id: any) {
+    return this.commContract.voteComplaint({ id: id });
+  }
+
+  // remove vote
+  async removeVote(id: any) {
+    return await this.commContract.removeVote({ id: id });
+  }
+
+  async takeComplaint(id: any) {
+    return await this.commContract.takeComplaint({ id: id });
+  }
+
+  async finishComplaint(id: any) {
+    return await this.commContract.finishComplaint({ id: id });
   }
 
   async handleSignIn() {
     await this.wallet.requestSignIn({
       contractId: this.CONTRACT_ID,
-      methodNames: [] // add methods names to restrict access
+      methodNames: []
     })
   };
 
@@ -39,85 +88,4 @@ export class NearService {
     this.accountId = ''
     this.router.navigate(['']);
   };
-
-  async getComplaints() {
-    return await this.wallet.account().viewFunction(this.CONTRACT_ID, "getComplaints")
-  }
-
-  alreadyVoted(userId: any) {
-    return this.wallet.account().viewFunction(this.CONTRACT_ID, "hasAlreadyVoted", {accountId: userId})
-  }
-
-//function to add new complaint
-  addNewComplaint({
-                    title,
-                    description,
-                    category,
-                    location
-                  }: { title: any, description: any, category: any, location: any }) {
-    return this.wallet.account().functionCall({
-      contractId: this.CONTRACT_ID,
-      methodName: "addNewComplaint",
-      gas: this.gas,
-      args: {title, description, category, location}
-    });
-  }
-
-//function to vote
-  voteComplaint(id: any) {
-    return this.wallet.account().functionCall({
-      contractId: this.CONTRACT_ID,
-      methodName: "voteComplaint",
-      args: {id: id}
-    });
-  }
-
-//function to remove vote
-  removeVote(id: any) {
-    return this.wallet.account().functionCall({
-      contractId: this.CONTRACT_ID,
-      methodName: "removeVote",
-      args: {id: id}
-    });
-  }
-
-// export const voteComplaint = ({id}) => {
-//   console.log(id)
-//   return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "voteComplaint",
-//       gas,
-//       args: {id}
-//   })
-// }
-
-// export const removeVote = ({id}) => {
-//   console.log(id)
-//   return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "removeVote",
-//       gas,
-//       args: {id}
-//   })
-// }
-
-// export const takeComplaint = ({id}) => {
-//   console.log(id)
-//   return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "takeComplaint",
-//       gas,
-//       args: {id}
-//   })
-// }
-
-// export const finishComplaint = ({id}) => {
-//   console.log(id)
-//   return wallet.account().functionCall({
-//       contractId: CONTRACT_ID,
-//       methodName: "finishComplaint",
-//       gas,
-//       args: {id}
-//   })
-// }
 }

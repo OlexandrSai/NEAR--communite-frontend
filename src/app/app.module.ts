@@ -13,6 +13,8 @@ import { AddComplaintFormComponent } from './components/add-complaint-form/add-c
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
